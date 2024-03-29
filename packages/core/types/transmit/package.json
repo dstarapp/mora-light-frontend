@@ -1,0 +1,4 @@
+{
+    "main": "dist/mora-light-core-types-transmit.cjs.js",
+    "module": "dist/mora-light-core-types-transmit.esm.js"
+}

@@ -1,0 +1,4 @@
+{
+    "main": "dist/mora-light-core-types-transform.cjs.js",
+    "module": "dist/mora-light-core-types-transform.esm.js"
+}

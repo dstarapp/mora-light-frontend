@@ -1,0 +1,535 @@
+{
+    "version": "0.0.1",
+    "data": [
+        {
+            "source": "input",
+            "input": {
+                "result": { "type": "text" },
+                "ui": {
+                    "type": "TextInputComponent",
+                    "style": { "type": "text" },
+                    "label": "Canister id",
+                    "placeholder": "Please input canister id"
+                }
+            },
+            "exported": { "target": "inner", "name": "fe226096-e3cf-43fb-bfd4-45f7cca082d7" }
+        },
+        {
+            "source": "canister",
+            "canister": {
+                "canister_id": { "fixed": true, "value": "3xwpq-ziaaa-aaaah-qcn4a-cai" },
+                "info": {
+                    "module_hash": "df0ad4fb70fdc24766fad900590361820e5fbfe65ddf7e2f470cb0e1c519ee61",
+                    "updated": 1684461192857
+                },
+                "candid": {
+                    "custom": false,
+                    "did": "type UserInfoPage = \n record {\n   balances: record {\n               vec record {\n                     text;\n                     nat;\n                   };\n               nat;\n             };\n   lpBalances: record {\n                 vec record {\n                       text;\n                       nat;\n                     };\n                 nat;\n               };\n };\ntype UserInfo = \n record {\n   balances: vec record {\n                   text;\n                   nat;\n                 };\n   lpBalances: vec record {\n                     text;\n                     nat;\n                   };\n };\ntype TxReceipt = \n variant {\n   err: text;\n   ok: nat;\n };\ntype TokenInfoWithType = \n record {\n   decimals: nat8;\n   fee: nat;\n   id: text;\n   name: text;\n   symbol: text;\n   tokenType: text;\n   totalSupply: nat;\n };\ntype TokenInfoExt = \n record {\n   decimals: nat8;\n   fee: nat;\n   id: text;\n   name: text;\n   symbol: text;\n   totalSupply: nat;\n };\ntype TokenAnalyticsInfo = \n record {\n   decimals: nat8;\n   fee: nat;\n   name: text;\n   symbol: text;\n   totalSupply: nat;\n };\ntype Time = int;\ntype SwapInfo = \n record {\n   cycles: nat;\n   owner: principal;\n   pairs: vec PairInfoExt;\n   tokens: vec TokenInfoExt;\n };\ntype PairInfoExt = \n record {\n   blockTimestampLast: int;\n   creator: principal;\n   id: text;\n   kLast: nat;\n   lptoken: text;\n   price0CumulativeLast: nat;\n   price1CumulativeLast: nat;\n   reserve0: nat;\n   reserve1: nat;\n   token0: text;\n   token1: text;\n   totalSupply: nat;\n };\ntype DepositSubAccounts = \n record {\n   created_at: Time;\n   depositAId: text;\n   subaccount: blob;\n   transactionOwner: principal;\n };\nservice : {\n  addAuth: (principal) -> (bool);\n  addLiquidity: (principal, principal, nat, nat, nat, nat, int) ->\n   (TxReceipt);\n  addToken: (principal, text) -> (TxReceipt);\n  allowance: (text, principal, principal) -> (nat) query;\n  approve: (text, principal, nat) -> (bool);\n  balanceOf: (text, principal) -> (nat) query;\n  burn: (text, nat) -> (bool);\n  createPair: (principal, principal) -> (TxReceipt);\n  decimals: (text) -> (nat8) query;\n  deposit: (principal, nat) -> (TxReceipt);\n  depositTo: (principal, principal, nat) -> (TxReceipt);\n  exportBalances: (text) -> (opt vec record {\n                                       principal;\n                                       nat;\n                                     }) query;\n  exportLPTokens: () -> (vec TokenInfoExt) query;\n  exportPairs: () -> (vec PairInfoExt) query;\n  exportSubAccounts: () -> (vec record {\n                                  principal;\n                                  DepositSubAccounts;\n                                });\n  exportTokenTypes: () -> (vec record {\n                                 text;\n                                 text;\n                               }) query;\n  exportTokens: () -> (vec TokenInfoExt) query;\n  getAllPairs: () -> (vec PairInfoExt) query;\n  getBalance: (principal, text) -> (nat);\n  getHolders: (text) -> (nat) query;\n  getLPTokenId: (principal, principal) -> (text) query;\n  getNumPairs: () -> (nat) query;\n  getPair: (principal, principal) -> (opt PairInfoExt) query;\n  getPairs: (nat, nat) -> (vec PairInfoExt, nat) query;\n  getSupportedTokenList: () -> (vec TokenInfoWithType) query;\n  getSupportedTokenListByName: (text, nat, nat) -> (vec TokenInfoExt,\n   nat) query;\n  getSupportedTokenListSome: (nat, nat) -> (vec TokenInfoExt, nat) query;\n  getSwapInfo: () -> (SwapInfo) query;\n  getTokenMetadata: (text) -> (TokenAnalyticsInfo) query;\n  getUserBalances: (principal) -> (vec record {\n                                         text;\n                                         nat;\n                                       }) query;\n  getUserInfo: (principal) -> (UserInfo) query;\n  getUserInfoAbove: (principal, nat, nat) -> (UserInfo) query;\n  getUserInfoByNamePageAbove: (principal, int, text, nat, nat, int, text,\n   nat, nat) -> (UserInfoPage) query;\n  getUserLPBalances: (principal) -> (vec record {\n                                           text;\n                                           nat;\n                                         }) query;\n  getUserLPBalancesAbove: (principal, nat) -> (vec record {\n                                                     text;\n                                                     nat;\n                                                   }) query;\n  historySize: () -> (nat);\n  initateTransfer: () -> (text);\n  initiateICRC1Transfer: () -> (vec nat8);\n  name: (text) -> (text) query;\n  removeAuth: (principal) -> (bool);\n  removeLiquidity: (principal, principal, nat, nat, nat, principal, int) ->\n   (TxReceipt);\n  setFeeForToken: (text, nat) -> (bool);\n  setFeeOn: (bool) -> (bool);\n  setFeeTo: (principal) -> (bool);\n  setGlobalTokenFee: (nat) -> (bool);\n  setMaxTokens: (nat) -> (bool);\n  setOwner: (principal) -> (bool);\n  setPairSupply: (text, nat) -> (bool);\n  setPermissionless: (bool) -> (bool);\n  swapExactTokensForTokens: (nat, nat, vec text, principal, int) ->\n   (TxReceipt);\n  swapTokensForExactTokens: (nat, nat, vec text, principal, int) ->\n   (TxReceipt);\n  symbol: (text) -> (text) query;\n  totalSupply: (text) -> (nat) query;\n  transfer: (text, principal, nat) -> (bool);\n  transferFrom: (text, principal, principal, nat) -> (bool);\n  updateAllTokenMetadata: () -> (bool);\n  updateTokenFees: () -> (bool);\n  updateTokenMetadata: (text) -> (bool);\n  withdraw: (principal, nat) -> (TxReceipt);\n  withdrawTo: (principal, principal, nat) -> (TxReceipt);\n}\n",
+                    "javascript": "export const idlFactory = ({ IDL }) => {\n  const TxReceipt = IDL.Variant({ 'ok' : IDL.Nat, 'err' : IDL.Text });\n  const TokenInfoExt = IDL.Record({\n    'id' : IDL.Text,\n    'fee' : IDL.Nat,\n    'decimals' : IDL.Nat8,\n    'name' : IDL.Text,\n    'totalSupply' : IDL.Nat,\n    'symbol' : IDL.Text,\n  });\n  const PairInfoExt = IDL.Record({\n    'id' : IDL.Text,\n    'price0CumulativeLast' : IDL.Nat,\n    'creator' : IDL.Principal,\n    'reserve0' : IDL.Nat,\n    'reserve1' : IDL.Nat,\n    'lptoken' : IDL.Text,\n    'totalSupply' : IDL.Nat,\n    'token0' : IDL.Text,\n    'token1' : IDL.Text,\n    'price1CumulativeLast' : IDL.Nat,\n    'kLast' : IDL.Nat,\n    'blockTimestampLast' : IDL.Int,\n  });\n  const Time = IDL.Int;\n  const DepositSubAccounts = IDL.Record({\n    'depositAId' : IDL.Text,\n    'subaccount' : IDL.Vec(IDL.Nat8),\n    'created_at' : Time,\n    'transactionOwner' : IDL.Principal,\n  });\n  const TokenInfoWithType = IDL.Record({\n    'id' : IDL.Text,\n    'fee' : IDL.Nat,\n    'decimals' : IDL.Nat8,\n    'name' : IDL.Text,\n    'totalSupply' : IDL.Nat,\n    'tokenType' : IDL.Text,\n    'symbol' : IDL.Text,\n  });\n  const SwapInfo = IDL.Record({\n    'owner' : IDL.Principal,\n    'cycles' : IDL.Nat,\n    'tokens' : IDL.Vec(TokenInfoExt),\n    'pairs' : IDL.Vec(PairInfoExt),\n  });\n  const TokenAnalyticsInfo = IDL.Record({\n    'fee' : IDL.Nat,\n    'decimals' : IDL.Nat8,\n    'name' : IDL.Text,\n    'totalSupply' : IDL.Nat,\n    'symbol' : IDL.Text,\n  });\n  const UserInfo = IDL.Record({\n    'lpBalances' : IDL.Vec(IDL.Tuple(IDL.Text, IDL.Nat)),\n    'balances' : IDL.Vec(IDL.Tuple(IDL.Text, IDL.Nat)),\n  });\n  const UserInfoPage = IDL.Record({\n    'lpBalances' : IDL.Tuple(IDL.Vec(IDL.Tuple(IDL.Text, IDL.Nat)), IDL.Nat),\n    'balances' : IDL.Tuple(IDL.Vec(IDL.Tuple(IDL.Text, IDL.Nat)), IDL.Nat),\n  });\n  return IDL.Service({\n    'addAuth' : IDL.Func([IDL.Principal], [IDL.Bool], []),\n    'addLiquidity' : IDL.Func(\n        [\n          IDL.Principal,\n          IDL.Principal,\n          IDL.Nat,\n          IDL.Nat,\n          IDL.Nat,\n          IDL.Nat,\n          IDL.Int,\n        ],\n        [TxReceipt],\n        [],\n      ),\n    'addToken' : IDL.Func([IDL.Principal, IDL.Text], [TxReceipt], []),\n    'allowance' : IDL.Func(\n        [IDL.Text, IDL.Principal, IDL.Principal],\n        [IDL.Nat],\n        ['query'],\n      ),\n    'approve' : IDL.Func([IDL.Text, IDL.Principal, IDL.Nat], [IDL.Bool], []),\n    'balanceOf' : IDL.Func([IDL.Text, IDL.Principal], [IDL.Nat], ['query']),\n    'burn' : IDL.Func([IDL.Text, IDL.Nat], [IDL.Bool], []),\n    'createPair' : IDL.Func([IDL.Principal, IDL.Principal], [TxReceipt], []),\n    'decimals' : IDL.Func([IDL.Text], [IDL.Nat8], ['query']),\n    'deposit' : IDL.Func([IDL.Principal, IDL.Nat], [TxReceipt], []),\n    'depositTo' : IDL.Func(\n        [IDL.Principal, IDL.Principal, IDL.Nat],\n        [TxReceipt],\n        [],\n      ),\n    'exportBalances' : IDL.Func(\n        [IDL.Text],\n        [IDL.Opt(IDL.Vec(IDL.Tuple(IDL.Principal, IDL.Nat)))],\n        ['query'],\n      ),\n    'exportLPTokens' : IDL.Func([], [IDL.Vec(TokenInfoExt)], ['query']),\n    'exportPairs' : IDL.Func([], [IDL.Vec(PairInfoExt)], ['query']),\n    'exportSubAccounts' : IDL.Func(\n        [],\n        [IDL.Vec(IDL.Tuple(IDL.Principal, DepositSubAccounts))],\n        [],\n      ),\n    'exportTokenTypes' : IDL.Func(\n        [],\n        [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Text))],\n        ['query'],\n      ),\n    'exportTokens' : IDL.Func([], [IDL.Vec(TokenInfoExt)], ['query']),\n    'getAllPairs' : IDL.Func([], [IDL.Vec(PairInfoExt)], ['query']),\n    'getBalance' : IDL.Func([IDL.Principal, IDL.Text], [IDL.Nat], []),\n    'getHolders' : IDL.Func([IDL.Text], [IDL.Nat], ['query']),\n    'getLPTokenId' : IDL.Func(\n        [IDL.Principal, IDL.Principal],\n        [IDL.Text],\n        ['query'],\n      ),\n    'getNumPairs' : IDL.Func([], [IDL.Nat], ['query']),\n    'getPair' : IDL.Func(\n        [IDL.Principal, IDL.Principal],\n        [IDL.Opt(PairInfoExt)],\n        ['query'],\n      ),\n    'getPairs' : IDL.Func(\n        [IDL.Nat, IDL.Nat],\n        [IDL.Vec(PairInfoExt), IDL.Nat],\n        ['query'],\n      ),\n    'getSupportedTokenList' : IDL.Func(\n        [],\n        [IDL.Vec(TokenInfoWithType)],\n        ['query'],\n      ),\n    'getSupportedTokenListByName' : IDL.Func(\n        [IDL.Text, IDL.Nat, IDL.Nat],\n        [IDL.Vec(TokenInfoExt), IDL.Nat],\n        ['query'],\n      ),\n    'getSupportedTokenListSome' : IDL.Func(\n        [IDL.Nat, IDL.Nat],\n        [IDL.Vec(TokenInfoExt), IDL.Nat],\n        ['query'],\n      ),\n    'getSwapInfo' : IDL.Func([], [SwapInfo], ['query']),\n    'getTokenMetadata' : IDL.Func([IDL.Text], [TokenAnalyticsInfo], ['query']),\n    'getUserBalances' : IDL.Func(\n        [IDL.Principal],\n        [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Nat))],\n        ['query'],\n      ),\n    'getUserInfo' : IDL.Func([IDL.Principal], [UserInfo], ['query']),\n    'getUserInfoAbove' : IDL.Func(\n        [IDL.Principal, IDL.Nat, IDL.Nat],\n        [UserInfo],\n        ['query'],\n      ),\n    'getUserInfoByNamePageAbove' : IDL.Func(\n        [\n          IDL.Principal,\n          IDL.Int,\n          IDL.Text,\n          IDL.Nat,\n          IDL.Nat,\n          IDL.Int,\n          IDL.Text,\n          IDL.Nat,\n          IDL.Nat,\n        ],\n        [UserInfoPage],\n        ['query'],\n      ),\n    'getUserLPBalances' : IDL.Func(\n        [IDL.Principal],\n        [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Nat))],\n        ['query'],\n      ),\n    'getUserLPBalancesAbove' : IDL.Func(\n        [IDL.Principal, IDL.Nat],\n        [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Nat))],\n        ['query'],\n      ),\n    'historySize' : IDL.Func([], [IDL.Nat], []),\n    'initateTransfer' : IDL.Func([], [IDL.Text], []),\n    'initiateICRC1Transfer' : IDL.Func([], [IDL.Vec(IDL.Nat8)], []),\n    'name' : IDL.Func([IDL.Text], [IDL.Text], ['query']),\n    'removeAuth' : IDL.Func([IDL.Principal], [IDL.Bool], []),\n    'removeLiquidity' : IDL.Func(\n        [\n          IDL.Principal,\n          IDL.Principal,\n          IDL.Nat,\n          IDL.Nat,\n          IDL.Nat,\n          IDL.Principal,\n          IDL.Int,\n        ],\n        [TxReceipt],\n        [],\n      ),\n    'setFeeForToken' : IDL.Func([IDL.Text, IDL.Nat], [IDL.Bool], []),\n    'setFeeOn' : IDL.Func([IDL.Bool], [IDL.Bool], []),\n    'setFeeTo' : IDL.Func([IDL.Principal], [IDL.Bool], []),\n    'setGlobalTokenFee' : IDL.Func([IDL.Nat], [IDL.Bool], []),\n    'setMaxTokens' : IDL.Func([IDL.Nat], [IDL.Bool], []),\n    'setOwner' : IDL.Func([IDL.Principal], [IDL.Bool], []),\n    'setPairSupply' : IDL.Func([IDL.Text, IDL.Nat], [IDL.Bool], []),\n    'setPermissionless' : IDL.Func([IDL.Bool], [IDL.Bool], []),\n    'swapExactTokensForTokens' : IDL.Func(\n        [IDL.Nat, IDL.Nat, IDL.Vec(IDL.Text), IDL.Principal, IDL.Int],\n        [TxReceipt],\n        [],\n      ),\n    'swapTokensForExactTokens' : IDL.Func(\n        [IDL.Nat, IDL.Nat, IDL.Vec(IDL.Text), IDL.Principal, IDL.Int],\n        [TxReceipt],\n        [],\n      ),\n    'symbol' : IDL.Func([IDL.Text], [IDL.Text], ['query']),\n    'totalSupply' : IDL.Func([IDL.Text], [IDL.Nat], ['query']),\n    'transfer' : IDL.Func([IDL.Text, IDL.Principal, IDL.Nat], [IDL.Bool], []),\n    'transferFrom' : IDL.Func(\n        [IDL.Text, IDL.Principal, IDL.Principal, IDL.Nat],\n        [IDL.Bool],\n        [],\n      ),\n    'updateAllTokenMetadata' : IDL.Func([], [IDL.Bool], []),\n    'updateTokenFees' : IDL.Func([], [IDL.Bool], []),\n    'updateTokenMetadata' : IDL.Func([IDL.Text], [IDL.Bool], []),\n    'withdraw' : IDL.Func([IDL.Principal, IDL.Nat], [TxReceipt], []),\n    'withdrawTo' : IDL.Func(\n        [IDL.Principal, IDL.Principal, IDL.Nat],\n        [TxReceipt],\n        [],\n      ),\n  });\n};\nexport const init = ({ IDL }) => { return []; };"
+                },
+                "method": {
+                    "name": "getTokenMetadata",
+                    "arg": {
+                        "type": "tuple",
+                        "subitems": [{ "key": "_0_", "type": { "type": "text" } }]
+                    },
+                    "result": {
+                        "type": "tuple",
+                        "subitems": [
+                            {
+                                "key": "_0_",
+                                "type": {
+                                    "type": "record",
+                                    "subitems": [
+                                        { "key": "fee", "type": { "type": "nat" } },
+                                        { "key": "decimals", "type": { "type": "nat8" } },
+                                        { "key": "name", "type": { "type": "text" } },
+                                        { "key": "totalSupply", "type": { "type": "nat" } },
+                                        { "key": "symbol", "type": { "type": "text" } }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "arg": {
+                    "type": {
+                        "type": "tuple",
+                        "subitems": [{ "key": "_0_", "type": { "type": "text" } }]
+                    },
+                    "constraint": {
+                        "type": "tuple",
+                        "subitems": [
+                            {
+                                "type": { "type": "text" },
+                                "constraint": {
+                                    "type": "force",
+                                    "source": {
+                                        "source": "inner",
+                                        "inner": {
+                                            "name": "fe226096-e3cf-43fb-bfd4-45f7cca082d7",
+                                            "result": { "type": "text" },
+                                            "extra": { "constant": false }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                "identity": { "from": "anonymous" }
+            },
+            "exported": { "target": "inner", "name": "30a1f985-c468-4a97-b73a-5a476ff2e0e8" }
+        },
+        {
+            "source": "inner",
+            "inner": {
+                "name": "30a1f985-c468-4a97-b73a-5a476ff2e0e8",
+                "result": {
+                    "type": "tuple",
+                    "subitems": [
+                        {
+                            "key": "_0_",
+                            "type": {
+                                "type": "record",
+                                "subitems": [
+                                    { "key": "fee", "type": { "type": "nat" } },
+                                    { "key": "decimals", "type": { "type": "nat8" } },
+                                    { "key": "name", "type": { "type": "text" } },
+                                    { "key": "totalSupply", "type": { "type": "nat" } },
+                                    { "key": "symbol", "type": { "type": "text" } }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "extra": { "constant": false }
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        {
+                            "key": "_0_",
+                            "type": {
+                                "type": "record",
+                                "subitems": [
+                                    { "key": "fee", "type": { "type": "nat" } },
+                                    { "key": "decimals", "type": { "type": "nat8" } },
+                                    { "key": "name", "type": { "type": "text" } },
+                                    { "key": "totalSupply", "type": { "type": "nat" } },
+                                    { "key": "symbol", "type": { "type": "text" } }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "transform": { "type": "function", "code": "data = data[0];\nresult = data;" },
+                "to": {
+                    "type": "record",
+                    "subitems": [
+                        { "key": "fee", "type": { "type": "nat" } },
+                        { "key": "decimals", "type": { "type": "nat8" } },
+                        { "key": "name", "type": { "type": "text" } },
+                        { "key": "totalSupply", "type": { "type": "nat" } },
+                        { "key": "symbol", "type": { "type": "text" } }
+                    ]
+                }
+            },
+            "exported": { "target": "inner", "name": "48f51732-175e-4a55-abef-ebe813c32fa8" }
+        },
+        {
+            "source": "combined",
+            "combined": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        {
+                            "key": "_0_",
+                            "type": {
+                                "type": "record",
+                                "subitems": [
+                                    { "key": "fee", "type": { "type": "nat" } },
+                                    { "key": "decimals", "type": { "type": "nat8" } },
+                                    { "key": "name", "type": { "type": "text" } },
+                                    { "key": "totalSupply", "type": { "type": "nat" } },
+                                    { "key": "symbol", "type": { "type": "text" } }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "arg": {
+                    "type": {
+                        "type": "tuple",
+                        "subitems": [
+                            {
+                                "key": "_0_",
+                                "type": {
+                                    "type": "record",
+                                    "subitems": [
+                                        { "key": "fee", "type": { "type": "nat" } },
+                                        { "key": "decimals", "type": { "type": "nat8" } },
+                                        { "key": "name", "type": { "type": "text" } },
+                                        { "key": "totalSupply", "type": { "type": "nat" } },
+                                        { "key": "symbol", "type": { "type": "text" } }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "constraint": {
+                        "type": "tuple",
+                        "subitems": [
+                            {
+                                "type": {
+                                    "type": "record",
+                                    "subitems": [
+                                        { "key": "fee", "type": { "type": "nat" } },
+                                        { "key": "decimals", "type": { "type": "nat8" } },
+                                        { "key": "name", "type": { "type": "text" } },
+                                        { "key": "totalSupply", "type": { "type": "nat" } },
+                                        { "key": "symbol", "type": { "type": "text" } }
+                                    ]
+                                },
+                                "constraint": {
+                                    "type": "force",
+                                    "source": {
+                                        "source": "inner",
+                                        "inner": {
+                                            "name": "48f51732-175e-4a55-abef-ebe813c32fa8",
+                                            "result": {
+                                                "type": "record",
+                                                "subitems": [
+                                                    { "key": "fee", "type": { "type": "nat" } },
+                                                    {
+                                                        "key": "decimals",
+                                                        "type": { "type": "nat8" }
+                                                    },
+                                                    { "key": "name", "type": { "type": "text" } },
+                                                    {
+                                                        "key": "totalSupply",
+                                                        "type": { "type": "nat" }
+                                                    },
+                                                    { "key": "symbol", "type": { "type": "text" } }
+                                                ]
+                                            },
+                                            "extra": { "constant": false }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        {
+                            "key": "_0_",
+                            "type": {
+                                "type": "record",
+                                "subitems": [
+                                    { "key": "fee", "type": { "type": "nat" } },
+                                    { "key": "decimals", "type": { "type": "nat8" } },
+                                    { "key": "name", "type": { "type": "text" } },
+                                    { "key": "totalSupply", "type": { "type": "nat" } },
+                                    { "key": "symbol", "type": { "type": "text" } }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "transform": {
+                    "type": "function",
+                    "code": "result = {\n        fee: \"Fee:   \"+ Number(output.fee)/100000000 +'ICP',\n        decimals : \"Decimals:   \"+ output.decimals + '',\n        name:\"Token Name:   \"+output.name ,\n        totalSupply : \"Total supply   \"+ Number(output.totalSupply)/ 100000000 + '',\n        symbol: \"Token name:   \"+ output.symbol + '',\n        };\nresult = [result];"
+                },
+                "to": {
+                    "type": "tuple",
+                    "subitems": [
+                        {
+                            "key": "_0_",
+                            "type": {
+                                "type": "record",
+                                "subitems": [
+                                    { "key": "fee", "type": { "type": "text" } },
+                                    { "key": "decimals", "type": { "type": "text" } },
+                                    { "key": "name", "type": { "type": "text" } },
+                                    { "key": "totalSupply", "type": { "type": "text" } },
+                                    { "key": "symbol", "type": { "type": "text" } }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "child": 1,
+                "names": ["output"]
+            },
+            "exported": { "target": "inner", "name": "08055fe9-9971-4ac5-862b-270ba9cfe671" }
+        },
+        {
+            "source": "inner",
+            "inner": {
+                "name": "08055fe9-9971-4ac5-862b-270ba9cfe671",
+                "result": {
+                    "type": "tuple",
+                    "subitems": [
+                        {
+                            "key": "_0_",
+                            "type": {
+                                "type": "record",
+                                "subitems": [
+                                    { "key": "fee", "type": { "type": "text" } },
+                                    { "key": "decimals", "type": { "type": "text" } },
+                                    { "key": "name", "type": { "type": "text" } },
+                                    { "key": "totalSupply", "type": { "type": "text" } },
+                                    { "key": "symbol", "type": { "type": "text" } }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "extra": { "constant": false }
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        {
+                            "key": "_0_",
+                            "type": {
+                                "type": "record",
+                                "subitems": [
+                                    { "key": "fee", "type": { "type": "text" } },
+                                    { "key": "decimals", "type": { "type": "text" } },
+                                    { "key": "name", "type": { "type": "text" } },
+                                    { "key": "totalSupply", "type": { "type": "text" } },
+                                    { "key": "symbol", "type": { "type": "text" } }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "transform": { "type": "function", "code": "data = data[0];\nresult = data;" },
+                "to": {
+                    "type": "record",
+                    "subitems": [
+                        { "key": "fee", "type": { "type": "text" } },
+                        { "key": "decimals", "type": { "type": "text" } },
+                        { "key": "name", "type": { "type": "text" } },
+                        { "key": "totalSupply", "type": { "type": "text" } },
+                        { "key": "symbol", "type": { "type": "text" } }
+                    ]
+                }
+            },
+            "exported": { "target": "inner", "name": "1bae2fbf-1a9f-4a39-b1af-2cbb3d1fbf5c" }
+        }
+    ],
+    "transmits": [
+        {
+            "transmit": "show",
+            "from": {
+                "type": "tuple",
+                "subitems": [
+                    { "key": "_0_", "type": { "type": "text" } },
+                    {
+                        "key": "_1_",
+                        "type": {
+                            "type": "tuple",
+                            "subitems": [
+                                {
+                                    "key": "_0_",
+                                    "type": {
+                                        "type": "record",
+                                        "subitems": [
+                                            { "key": "fee", "type": { "type": "nat" } },
+                                            { "key": "decimals", "type": { "type": "nat8" } },
+                                            { "key": "name", "type": { "type": "text" } },
+                                            { "key": "totalSupply", "type": { "type": "nat" } },
+                                            { "key": "symbol", "type": { "type": "text" } }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "key": "_2_",
+                        "type": {
+                            "type": "record",
+                            "subitems": [
+                                { "key": "fee", "type": { "type": "nat" } },
+                                { "key": "decimals", "type": { "type": "nat8" } },
+                                { "key": "name", "type": { "type": "text" } },
+                                { "key": "totalSupply", "type": { "type": "nat" } },
+                                { "key": "symbol", "type": { "type": "text" } }
+                            ]
+                        }
+                    },
+                    {
+                        "key": "_3_",
+                        "type": {
+                            "type": "tuple",
+                            "subitems": [
+                                {
+                                    "key": "_0_",
+                                    "type": {
+                                        "type": "record",
+                                        "subitems": [
+                                            { "key": "fee", "type": { "type": "text" } },
+                                            { "key": "decimals", "type": { "type": "text" } },
+                                            { "key": "name", "type": { "type": "text" } },
+                                            { "key": "totalSupply", "type": { "type": "text" } },
+                                            { "key": "symbol", "type": { "type": "text" } }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "key": "_4_",
+                        "type": {
+                            "type": "record",
+                            "subitems": [
+                                { "key": "fee", "type": { "type": "text" } },
+                                { "key": "decimals", "type": { "type": "text" } },
+                                { "key": "name", "type": { "type": "text" } },
+                                { "key": "totalSupply", "type": { "type": "text" } },
+                                { "key": "symbol", "type": { "type": "text" } }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        { "key": "_0_", "type": { "type": "text" } },
+                        {
+                            "key": "_1_",
+                            "type": {
+                                "type": "tuple",
+                                "subitems": [
+                                    {
+                                        "key": "_0_",
+                                        "type": {
+                                            "type": "record",
+                                            "subitems": [
+                                                { "key": "fee", "type": { "type": "nat" } },
+                                                { "key": "decimals", "type": { "type": "nat8" } },
+                                                { "key": "name", "type": { "type": "text" } },
+                                                { "key": "totalSupply", "type": { "type": "nat" } },
+                                                { "key": "symbol", "type": { "type": "text" } }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "key": "_2_",
+                            "type": {
+                                "type": "record",
+                                "subitems": [
+                                    { "key": "fee", "type": { "type": "nat" } },
+                                    { "key": "decimals", "type": { "type": "nat8" } },
+                                    { "key": "name", "type": { "type": "text" } },
+                                    { "key": "totalSupply", "type": { "type": "nat" } },
+                                    { "key": "symbol", "type": { "type": "text" } }
+                                ]
+                            }
+                        },
+                        {
+                            "key": "_3_",
+                            "type": {
+                                "type": "tuple",
+                                "subitems": [
+                                    {
+                                        "key": "_0_",
+                                        "type": {
+                                            "type": "record",
+                                            "subitems": [
+                                                { "key": "fee", "type": { "type": "text" } },
+                                                { "key": "decimals", "type": { "type": "text" } },
+                                                { "key": "name", "type": { "type": "text" } },
+                                                {
+                                                    "key": "totalSupply",
+                                                    "type": { "type": "text" }
+                                                },
+                                                { "key": "symbol", "type": { "type": "text" } }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "key": "_4_",
+                            "type": {
+                                "type": "record",
+                                "subitems": [
+                                    { "key": "fee", "type": { "type": "text" } },
+                                    { "key": "decimals", "type": { "type": "text" } },
+                                    { "key": "name", "type": { "type": "text" } },
+                                    { "key": "totalSupply", "type": { "type": "text" } },
+                                    { "key": "symbol", "type": { "type": "text" } }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "transform": { "type": "function", "code": "result = data[4];" },
+                "to": {
+                    "type": "record",
+                    "subitems": [
+                        { "key": "fee", "type": { "type": "text" } },
+                        { "key": "decimals", "type": { "type": "text" } },
+                        { "key": "name", "type": { "type": "text" } },
+                        { "key": "totalSupply", "type": { "type": "text" } },
+                        { "key": "symbol", "type": { "type": "text" } }
+                    ]
+                }
+            },
+            "view": {
+                "from": {
+                    "type": "record",
+                    "subitems": [
+                        { "key": "fee", "type": { "type": "text" } },
+                        { "key": "decimals", "type": { "type": "text" } },
+                        { "key": "name", "type": { "type": "text" } },
+                        { "key": "totalSupply", "type": { "type": "text" } },
+                        { "key": "symbol", "type": { "type": "text" } }
+                    ]
+                },
+                "subitems": [
+                    {
+                        "key": "fee",
+                        "view": { "from": { "type": "text" }, "constraint": { "name": "TextView" } }
+                    },
+                    {
+                        "key": "decimals",
+                        "view": { "from": { "type": "text" }, "constraint": { "name": "TextView" } }
+                    },
+                    {
+                        "key": "name",
+                        "view": { "from": { "type": "text" }, "constraint": { "name": "TextView" } }
+                    },
+                    {
+                        "key": "totalSupply",
+                        "view": { "from": { "type": "text" }, "constraint": { "name": "TextView" } }
+                    },
+                    {
+                        "key": "symbol",
+                        "view": { "from": { "type": "text" }, "constraint": { "name": "TextView" } }
+                    }
+                ],
+                "constraint": { "name": "RecordView", "ui": { "customLabel": "result" } }
+            }
+        }
+    ],
+    "trigger": { "type": "button", "text": "Query", "loading": false }
+}

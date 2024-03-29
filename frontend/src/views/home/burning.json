@@ -1,0 +1,60 @@
+{
+    "version": "0.0.1",
+    "data": [
+        {
+            "source": "constant",
+            "constant": { "result": { "type": "bool" }, "value": true },
+            "exported": { "target": "inner", "name": "14c45f19-fa00-4054-86d4-3809c9db875f" }
+        },
+        {
+            "source": "constant",
+            "constant": {
+                "result": { "type": "vec", "subtype": { "type": "nat" } },
+                "value": [
+                    { "type": "bigint", "value": "0" },
+                    { "type": "bigint", "value": "0" },
+                    { "type": "bigint", "value": "0" }
+                ]
+            },
+            "exported": { "target": "inner", "name": "d42e4a22-3849-4a65-bb81-067a78fef9a6" }
+        },
+        {
+            "source": "input",
+            "input": {
+                "result": { "type": "text" },
+                "ui": { "type": "TextInputComponent", "style": { "type": "text" }, "label": "1" }
+            },
+            "exported": { "target": "inner", "name": "5fc63178-b1ef-4922-b61f-108f541fc1da" }
+        }
+    ],
+    "transmits": [
+        {
+            "transmit": "show",
+            "from": {
+                "type": "tuple",
+                "subitems": [
+                    { "key": "_0_", "type": { "type": "bool" } },
+                    { "key": "_1_", "type": { "type": "vec", "subtype": { "type": "nat" } } },
+                    { "key": "_2_", "type": { "type": "text" } }
+                ]
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        { "key": "_0_", "type": { "type": "bool" } },
+                        { "key": "_1_", "type": { "type": "vec", "subtype": { "type": "nat" } } },
+                        { "key": "_2_", "type": { "type": "text" } }
+                    ]
+                },
+                "transform": { "type": "function", "code": "result = data[2];" },
+                "to": { "type": "text" }
+            },
+            "view": {
+                "from": { "type": "text" },
+                "constraint": { "name": "TextView", "ui": { "customLabel": "1" } }
+            }
+        }
+    ],
+    "trigger": { "type": "button", "text": "Run", "loading": false }
+}

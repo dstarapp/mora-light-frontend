@@ -1,0 +1,314 @@
+{
+    "version": "0.0.1",
+    "data": [
+        {
+            "source": "canister",
+            "canister": {
+                "canister_id": { "fixed": true, "value": "ipcaz-wiaaa-aaaai-qoy4q-cai" },
+                "info": {
+                    "module_hash": "cf2571dee5547597efc7c156e7c530e2939a0a42f239d5ecc1788af1280c02c0",
+                    "updated": 1684047244536
+                },
+                "candid": {
+                    "custom": false,
+                    "did": "type RecursiveArg = record {\n  recursive2 : RecursiveArg;\n  recursive : opt RecursiveArg;\n  field1 : text;\n  field2 : text;\n};\ntype RecursiveArg2 = variant { Recursive2 : RecursiveArg2 };\ntype RecursiveArg3 = record { items : vec RecursiveArg3 };\ntype TestRecord = record { field1 : text; field2 : text };\ntype TestVariant = variant {\n  Field1;\n  Field2 : text;\n  Field3 : record { age : nat; name : text };\n};\nservice : {\n  __get_candid_interface_tmp_hack : () -> (text) query;\n  exchange : (nat, nat) -> (nat, nat) query;\n  getName : () -> (text) query;\n  hello : (text) -> (text);\n  hello2 : (text) -> (text) query;\n  negative : (int) -> (int) query;\n  now : () -> (nat64) query;\n  setName : (text) -> () query;\n  testTuple : (record { text; text }) -> (text, text) query;\n  testTuple2 : (null) -> (text, text) query;\n  testVec : (vec text) -> (vec text) query;\n  test_blob : (vec nat8) -> (vec nat8) query;\n  test_empty : (text, empty, text) -> (text, empty) query;\n  test_float32 : (text) -> (text, float32) query;\n  test_float32_2 : (float32, text) -> (text, float32) query;\n  test_float64 : (text, float64) -> (text, float64) query;\n  test_float64_2 : (text, float32) -> (text, float64) query;\n  test_float64_3 : (text) -> (text, float64) query;\n  test_func : (text, func () -> ()) -> (text, func () -> ()) query;\n  test_func2 : (text) -> (text, func () -> ()) query;\n  test_func3 : (text) -> (text, func () -> ()) query;\n  test_opt : (opt text) -> (opt text) query;\n  test_record : (TestRecord) -> (TestRecord) query;\n  test_recursive : (RecursiveArg) -> (RecursiveArg) query;\n  test_recursive2 : (RecursiveArg2) -> (RecursiveArg2) query;\n  test_recursive3 : (RecursiveArg3) -> (RecursiveArg3) query;\n  test_reserved : (text, reserved, text) -> (text, reserved) query;\n  test_service : (text, service {}) -> (text, service {}) query;\n  test_service2 : (text) -> (text, service {}) query;\n  test_tuple : (record { nat; nat }) -> (\n      record { nat; nat },\n      record { text; text },\n    ) query;\n  test_variant : (TestVariant) -> (TestVariant) query;\n}",
+                    "javascript": "export const idlFactory = ({ IDL }) => {\n  const RecursiveArg = IDL.Rec();\n  const RecursiveArg2 = IDL.Rec();\n  const RecursiveArg3 = IDL.Rec();\n  const TestRecord = IDL.Record({ 'field1' : IDL.Text, 'field2' : IDL.Text });\n  RecursiveArg.fill(\n    IDL.Record({\n      'recursive2' : RecursiveArg,\n      'recursive' : IDL.Opt(RecursiveArg),\n      'field1' : IDL.Text,\n      'field2' : IDL.Text,\n    })\n  );\n  RecursiveArg2.fill(IDL.Variant({ 'Recursive2' : RecursiveArg2 }));\n  RecursiveArg3.fill(IDL.Record({ 'items' : IDL.Vec(RecursiveArg3) }));\n  const TestVariant = IDL.Variant({\n    'Field1' : IDL.Null,\n    'Field2' : IDL.Text,\n    'Field3' : IDL.Record({ 'age' : IDL.Nat, 'name' : IDL.Text }),\n  });\n  return IDL.Service({\n    '__get_candid_interface_tmp_hack' : IDL.Func([], [IDL.Text], ['query']),\n    'exchange' : IDL.Func([IDL.Nat, IDL.Nat], [IDL.Nat, IDL.Nat], ['query']),\n    'getName' : IDL.Func([], [IDL.Text], ['query']),\n    'hello' : IDL.Func([IDL.Text], [IDL.Text], []),\n    'hello2' : IDL.Func([IDL.Text], [IDL.Text], ['query']),\n    'negative' : IDL.Func([IDL.Int], [IDL.Int], ['query']),\n    'now' : IDL.Func([], [IDL.Nat64], ['query']),\n    'setName' : IDL.Func([IDL.Text], [], ['query']),\n    'testTuple' : IDL.Func(\n        [IDL.Tuple(IDL.Text, IDL.Text)],\n        [IDL.Text, IDL.Text],\n        ['query'],\n      ),\n    'testTuple2' : IDL.Func([IDL.Null], [IDL.Text, IDL.Text], ['query']),\n    'testVec' : IDL.Func([IDL.Vec(IDL.Text)], [IDL.Vec(IDL.Text)], ['query']),\n    'test_blob' : IDL.Func([IDL.Vec(IDL.Nat8)], [IDL.Vec(IDL.Nat8)], ['query']),\n    'test_empty' : IDL.Func(\n        [IDL.Text, IDL.Empty, IDL.Text],\n        [IDL.Text, IDL.Empty],\n        ['query'],\n      ),\n    'test_float32' : IDL.Func([IDL.Text], [IDL.Text, IDL.Float32], ['query']),\n    'test_float32_2' : IDL.Func(\n        [IDL.Float32, IDL.Text],\n        [IDL.Text, IDL.Float32],\n        ['query'],\n      ),\n    'test_float64' : IDL.Func(\n        [IDL.Text, IDL.Float64],\n        [IDL.Text, IDL.Float64],\n        ['query'],\n      ),\n    'test_float64_2' : IDL.Func(\n        [IDL.Text, IDL.Float32],\n        [IDL.Text, IDL.Float64],\n        ['query'],\n      ),\n    'test_float64_3' : IDL.Func([IDL.Text], [IDL.Text, IDL.Float64], ['query']),\n    'test_func' : IDL.Func(\n        [IDL.Text, IDL.Func([], [], [])],\n        [IDL.Text, IDL.Func([], [], [])],\n        ['query'],\n      ),\n    'test_func2' : IDL.Func(\n        [IDL.Text],\n        [IDL.Text, IDL.Func([], [], [])],\n        ['query'],\n      ),\n    'test_func3' : IDL.Func(\n        [IDL.Text],\n        [IDL.Text, IDL.Func([], [], [])],\n        ['query'],\n      ),\n    'test_opt' : IDL.Func([IDL.Opt(IDL.Text)], [IDL.Opt(IDL.Text)], ['query']),\n    'test_record' : IDL.Func([TestRecord], [TestRecord], ['query']),\n    'test_recursive' : IDL.Func([RecursiveArg], [RecursiveArg], ['query']),\n    'test_recursive2' : IDL.Func([RecursiveArg2], [RecursiveArg2], ['query']),\n    'test_recursive3' : IDL.Func([RecursiveArg3], [RecursiveArg3], ['query']),\n    'test_reserved' : IDL.Func(\n        [IDL.Text, IDL.Reserved, IDL.Text],\n        [IDL.Text, IDL.Reserved],\n        ['query'],\n      ),\n    'test_service' : IDL.Func(\n        [IDL.Text, IDL.Service({})],\n        [IDL.Text, IDL.Service({})],\n        ['query'],\n      ),\n    'test_service2' : IDL.Func(\n        [IDL.Text],\n        [IDL.Text, IDL.Service({})],\n        ['query'],\n      ),\n    'test_tuple' : IDL.Func(\n        [IDL.Tuple(IDL.Nat, IDL.Nat)],\n        [IDL.Tuple(IDL.Nat, IDL.Nat), IDL.Tuple(IDL.Text, IDL.Text)],\n        ['query'],\n      ),\n    'test_variant' : IDL.Func([TestVariant], [TestVariant], ['query']),\n  });\n};\nexport const init = ({ IDL }) => { return []; };"
+                },
+                "method": {
+                    "name": "test_recursive3",
+                    "arg": {
+                        "type": "tuple",
+                        "subitems": [
+                            {
+                                "key": "_0_",
+                                "type": {
+                                    "type": "rec",
+                                    "subtype": {
+                                        "type": "record",
+                                        "subitems": [
+                                            {
+                                                "key": "items",
+                                                "type": {
+                                                    "type": "vec",
+                                                    "subtype": { "type": "rec", "id": 1880 }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "id": 1880
+                                }
+                            }
+                        ]
+                    },
+                    "result": {
+                        "type": "tuple",
+                        "subitems": [
+                            {
+                                "key": "_0_",
+                                "type": {
+                                    "type": "rec",
+                                    "subtype": {
+                                        "type": "record",
+                                        "subitems": [
+                                            {
+                                                "key": "items",
+                                                "type": {
+                                                    "type": "vec",
+                                                    "subtype": { "type": "rec", "id": 1880 }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "id": 1880
+                                }
+                            }
+                        ]
+                    }
+                },
+                "arg": {
+                    "type": {
+                        "type": "tuple",
+                        "subitems": [
+                            {
+                                "key": "_0_",
+                                "type": {
+                                    "type": "rec",
+                                    "subtype": {
+                                        "type": "record",
+                                        "subitems": [
+                                            {
+                                                "key": "items",
+                                                "type": {
+                                                    "type": "vec",
+                                                    "subtype": { "type": "rec", "id": 1880 }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "id": 1880
+                                }
+                            }
+                        ]
+                    },
+                    "constraint": {
+                        "type": "tuple",
+                        "subitems": [
+                            {
+                                "type": {
+                                    "type": "rec",
+                                    "subtype": {
+                                        "type": "record",
+                                        "subitems": [
+                                            {
+                                                "key": "items",
+                                                "type": {
+                                                    "type": "vec",
+                                                    "subtype": { "type": "rec", "id": 1880 }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "id": 1880
+                                },
+                                "constraint": {
+                                    "type": "rec",
+                                    "value": {
+                                        "type": {
+                                            "type": "record",
+                                            "subitems": [
+                                                {
+                                                    "key": "items",
+                                                    "type": {
+                                                        "type": "vec",
+                                                        "subtype": { "type": "rec", "id": 1880 }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "constraint": {
+                                            "type": "record",
+                                            "subitems": [
+                                                {
+                                                    "type": {
+                                                        "type": "vec",
+                                                        "subtype": { "type": "rec", "id": 1880 }
+                                                    },
+                                                    "constraint": {
+                                                        "type": "vec",
+                                                        "constant": 1,
+                                                        "length": {
+                                                            "source": "constant",
+                                                            "constant": {
+                                                                "result": { "type": "nat32" },
+                                                                "value": 1
+                                                            }
+                                                        },
+                                                        "subitems": [
+                                                            {
+                                                                "type": "custom",
+                                                                "constraint": {
+                                                                    "type": {
+                                                                        "type": "rec",
+                                                                        "subtype": {
+                                                                            "type": "record",
+                                                                            "subitems": [
+                                                                                {
+                                                                                    "key": "items",
+                                                                                    "type": {
+                                                                                        "type": "vec",
+                                                                                        "subtype": {
+                                                                                            "type": "rec",
+                                                                                            "id": 1880
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "id": 1880
+                                                                    },
+                                                                    "constraint": {
+                                                                        "type": "rec",
+                                                                        "value": {
+                                                                            "type": {
+                                                                                "type": "record",
+                                                                                "subitems": [
+                                                                                    {
+                                                                                        "key": "items",
+                                                                                        "type": {
+                                                                                            "type": "vec",
+                                                                                            "subtype": {
+                                                                                                "type": "rec",
+                                                                                                "id": 1880
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                ]
+                                                                            },
+                                                                            "constraint": {
+                                                                                "type": "record",
+                                                                                "subitems": [
+                                                                                    {
+                                                                                        "type": {
+                                                                                            "type": "vec",
+                                                                                            "subtype": {
+                                                                                                "type": "rec",
+                                                                                                "id": 1880
+                                                                                            }
+                                                                                        },
+                                                                                        "constraint": {
+                                                                                            "type": "vec",
+                                                                                            "constant": 0
+                                                                                        }
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        "default": {
+                                                            "type": { "type": "rec", "id": 1880 },
+                                                            "constraint": {
+                                                                "type": "force",
+                                                                "source": {
+                                                                    "source": "input",
+                                                                    "input": {
+                                                                        "result": {
+                                                                            "type": "rec",
+                                                                            "id": 1880
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "using": "a89a7bb3-a3e3-4d64-9c15-a63839004b9b"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                "identity": { "from": "anonymous" }
+            },
+            "exported": { "target": "inner", "name": "232d2b50-78d1-4e47-ba40-49a17fa66fdf" }
+        },
+        {
+            "source": "inner",
+            "inner": {
+                "name": "232d2b50-78d1-4e47-ba40-49a17fa66fdf",
+                "result": {
+                    "type": "tuple",
+                    "subitems": [
+                        {
+                            "key": "_0_",
+                            "type": {
+                                "type": "rec",
+                                "subtype": {
+                                    "type": "record",
+                                    "subitems": [
+                                        {
+                                            "key": "items",
+                                            "type": {
+                                                "type": "vec",
+                                                "subtype": { "type": "rec", "id": 1880 }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "id": 1880
+                            }
+                        }
+                    ]
+                },
+                "extra": { "constant": false }
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        {
+                            "key": "_0_",
+                            "type": {
+                                "type": "rec",
+                                "subtype": {
+                                    "type": "record",
+                                    "subitems": [
+                                        {
+                                            "key": "items",
+                                            "type": {
+                                                "type": "vec",
+                                                "subtype": { "type": "rec", "id": 1880 }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "id": 1880
+                            }
+                        }
+                    ]
+                },
+                "transform": { "type": "function", "code": "data = data[0];\nresult = data;" },
+                "to": {
+                    "type": "rec",
+                    "subtype": {
+                        "type": "record",
+                        "subitems": [
+                            {
+                                "key": "items",
+                                "type": { "type": "vec", "subtype": { "type": "rec", "id": 1880 } }
+                            }
+                        ]
+                    },
+                    "id": 1880
+                }
+            },
+            "exported": { "target": "inner", "name": "" }
+        }
+    ],
+    "transmits": []
+}

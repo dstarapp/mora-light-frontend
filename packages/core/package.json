@@ -1,0 +1,90 @@
+{
+    "name": "@mora-light/core",
+    "author": "Anubis",
+    "private": false,
+    "version": "0.0.5",
+    "description": "Mora Light Core",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dstarapp/mora-light.git"
+    },
+    "keywords": [
+        "Mora",
+        "Light"
+    ],
+    "homepage": "https://mora.app",
+    "files": [
+        "dist",
+        "types"
+    ],
+    "main": "dist/mora-light-core.cjs.js",
+    "module": "dist/mora-light-core.esm.js",
+    "license": "MIT",
+    "exports": {
+        "./package.json": "./package.json",
+        ".": {
+            "module": "./dist/mora-light-core.esm.js",
+            "default": "./dist/mora-light-core.cjs.js"
+        },
+        "./types/common": {
+            "module": "./types/common/dist/types-common.esm.js",
+            "default": "./types/common/dist/types-common.cjs.js"
+        },
+        "./types/candid": {
+            "module": "./types/candid/dist/types-candid.esm.js",
+            "default": "./types/candid/dist/types-candid.cjs.js"
+        },
+        "./types/transform": {
+            "module": "./types/transform/dist/types-transform.esm.js",
+            "default": "./types/transform/dist/types-transform.cjs.js"
+        },
+        "./types/source": {
+            "module": "./types/source/dist/types-source.esm.js",
+            "default": "./types/source/dist/types-source.cjs.js"
+        },
+        "./types/trigger": {
+            "module": "./types/trigger/dist/types-trigger.esm.js",
+            "default": "./types/trigger/dist/types-trigger.cjs.js"
+        },
+        "./types/transmit": {
+            "module": "./types/transmit/dist/types-transmit.esm.js",
+            "default": "./types/transmit/dist/types-transmit.cjs.js"
+        },
+        "./types/running": {
+            "module": "./types/running/dist/types-running.esm.js",
+            "default": "./types/running/dist/types-running.cjs.js"
+        },
+        "./types": {
+            "module": "./types/dist/types.esm.js",
+            "default": "./types/dist/types.cjs.js"
+        }
+    },
+    "preconstruct": {
+        "entrypoints": [
+            "index.ts",
+            "types/common/index.ts",
+            "types/candid/index.ts",
+            "types/transform/index.ts",
+            "types/source/index.ts",
+            "types/trigger/index.ts",
+            "types/transmit/index.ts",
+            "types/running/index.ts",
+            "types/index.ts"
+        ]
+    },
+    "dependencies": {
+        "safer-eval": "^1.3.6"
+    },
+    "peerDependencies": {
+        "@dfinity/agent": "^0.19.2",
+        "@dfinity/candid": "^0.19.2",
+        "@dfinity/principal": "^0.19.2"
+    },
+    "devDependencies": {
+        "typescript": "^5.0.4"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    }
+}

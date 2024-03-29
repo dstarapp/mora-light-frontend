@@ -1,0 +1,4 @@
+{
+    "main": "dist/mora-light-core-types-trigger.cjs.js",
+    "module": "dist/mora-light-core-types-trigger.esm.js"
+}

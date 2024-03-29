@@ -1,0 +1,114 @@
+type CanisterStatus = variant { stopped; stopping; running };
+type CanisterStatusResult = record {
+  status : CanisterStatus;
+  memory_size : nat;
+  cycles : nat;
+  settings : DefiniteCAnisterSettings;
+  idle_cycles_burned_per_day : nat;
+  module_hash : opt vec nat8;
+};
+type CorePermission = variant {
+  WorkerFrozen;
+  ManagerPermission;
+  ManagerConfig;
+  ManagerQuery;
+  WorkerLog;
+  ManagerUpgrade;
+  WorkerPermission;
+  ManagerSettings;
+  ManagerLog;
+  WorkerUpdate;
+  ManagerRefresh;
+  WorkerFind;
+  ManagerFind;
+  ManagerInsert;
+  ManagerWasm;
+  WorkerUnfrozen;
+  WorkerInsert;
+  WorkerQuery;
+};
+type DefiniteCAnisterSettings = record {
+  freezing_threshold : nat;
+  controllers : vec principal;
+  memory_allocation : nat;
+  compute_allocation : nat;
+};
+type LightCore = record {
+  status : LightCoreStatus;
+  created : nat64;
+  content : LightCoreContent;
+  hash : text;
+  read : nat64;
+  used : nat64;
+  user : principal;
+  updated : nat64;
+};
+type LightCoreContent = record {
+  id : text;
+  info_json : text;
+  core_json : text;
+  experience_json : text;
+};
+type LightCoreStatus = variant {
+  FrozenByAuditor : record {
+    auditor : principal;
+    timestamp : nat64;
+    reason : text;
+  };
+  Alive : record { auditor : principal; timestamp : nat64 };
+  FrozenByAuthor : record { timestamp : nat64; reason : text };
+};
+type LightExecutingQueryResult = variant {
+  value : LightExecutingQueryValue;
+  none;
+  frozen : text;
+};
+type LightExecutingQueryValue = record {
+  id : text;
+  info_json : text;
+  created : nat64;
+  creator : principal;
+  core_json : text;
+  hash : text;
+  audited : nat64;
+  auditor : principal;
+  updated : nat64;
+};
+type Log = record { content : text; time : nat64; level : LogLevel };
+type LogLevel = variant { Error; Info; Warn; Debug; Trace };
+type MotokoResult = variant { ok; err : text };
+type Page = record { page : nat32; size : nat32 };
+type PageData = record {
+  all : nat32;
+  data : vec Log;
+  page : nat32;
+  size : nat32;
+};
+type WalletReceiveResult = record { accepted : nat64 };
+service : {
+  canister_status : () -> (CanisterStatusResult);
+  executing_query : (text) -> (LightExecutingQueryResult) query;
+  light_find : (text) -> (opt LightCore) query;
+  light_find_hashes : () -> (vec text) query;
+  light_frozen : (text, text, principal) -> (MotokoResult);
+  light_insert : (text, LightCoreContent, principal, principal) -> (
+      MotokoResult,
+    );
+  light_insert_core : (LightCore) -> (MotokoResult);
+  light_read : (text) -> (nat64);
+  light_unfrozen : (text, principal) -> (MotokoResult);
+  light_used : (text) -> (nat64);
+  logs_delete : (nat32) -> (bool);
+  logs_find_by_page : (Page) -> (PageData) query;
+  permissions_find : () -> (vec record { text; vec CorePermission }) query;
+  permissions_grant_all_permissions : (principal) -> (bool);
+  permissions_has_all_permissions : (principal) -> (bool) query;
+  permissions_modify : (
+      principal,
+      vec CorePermission,
+      vec CorePermission,
+    ) -> ();
+  permissions_revoke_all_permissions : (principal) -> (bool);
+  wallet_balance : () -> (nat) query;
+  wallet_receive : () -> (WalletReceiveResult);
+}

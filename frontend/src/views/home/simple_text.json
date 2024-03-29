@@ -1,0 +1,36 @@
+{
+    "version": "0.0.1",
+    "data": [
+        {
+            "source": "input",
+            "input": {
+                "result": { "type": "text" },
+                "ui": {
+                    "type": "TextInputComponent",
+                    "style": { "type": "text" },
+                    "label": "text1"
+                }
+            },
+            "exported": { "target": "inner", "name": "9e7221b9-03b7-423e-b01f-434a28db7e27" }
+        }
+    ],
+    "transmits": [
+        {
+            "transmit": "show",
+            "from": { "type": "tuple", "subitems": [{ "key": "_0_", "type": { "type": "text" } }] },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [{ "key": "_0_", "type": { "type": "text" } }]
+                },
+                "transform": { "type": "function", "code": "result = data[0];" },
+                "to": { "type": "text" }
+            },
+            "view": {
+                "from": { "type": "text" },
+                "constraint": { "name": "TextView", "ui": { "customLabel": "label 1" } }
+            }
+        }
+    ],
+    "trigger": { "type": "button", "text": "Run", "loading": false }
+}

@@ -1,0 +1,128 @@
+{
+    "version": "0.0.1",
+    "data": [
+        {
+            "source": "input",
+            "input": {
+                "result": { "type": "principal" },
+                "ui": { "type": "TextInputComponent", "style": { "type": "text" }, "label": "TEXT" }
+            },
+            "exported": { "target": "inner", "name": "20fb2df2-5fd9-4f77-8a13-80e38321746b" }
+        },
+        {
+            "source": "canister",
+            "canister": {
+                "canister_id": { "fixed": true, "value": "aeex5-aqaaa-aaaam-abm3q-cai" },
+                "info": {
+                    "module_hash": "b61ece22b48c2d9342d924bc1dc157d5680f1c9c9a0fa7afe20e6bf660483883",
+                    "updated": 1684906115980
+                },
+                "candid": {
+                    "custom": false,
+                    "did": "type TxReceipt = \n variant {\n   Err:\n    variant {\n      AmountTooSmall;\n      BlockUsed;\n      ErrorOperationStyle;\n      ErrorTo;\n      InsufficientAllowance;\n      InsufficientBalance;\n      LedgerTrap;\n      Other: text;\n      Unauthorized;\n    };\n   Ok: nat;\n };\ntype TokenInfo = \n record {\n   cycles: nat;\n   deployTime: Time;\n   feeTo: principal;\n   historySize: nat;\n   holderNumber: nat;\n   metadata: Metadata;\n };\ntype Time = int;\ntype Metadata = \n record {\n   decimals: nat8;\n   fee: nat;\n   logo: text;\n   name: text;\n   owner: principal;\n   symbol: text;\n   totalSupply: nat;\n };\nservice : {\n  allowance: (principal, principal) -> (nat) query;\n  approve: (principal, nat) -> (TxReceipt);\n  balanceOf: (principal) -> (nat) query;\n  burn: (nat) -> (TxReceipt);\n  decimals: () -> (nat8) query;\n  getAllowanceSize: () -> (nat) query;\n  getHolders: (nat, nat) -> (vec record {\n                                   principal;\n                                   nat;\n                                 }) query;\n  getMetadata: () -> (Metadata) query;\n  getTokenFee: () -> (nat) query;\n  getTokenInfo: () -> (TokenInfo) query;\n  getUserApprovals: (principal) -> (vec record {\n                                          principal;\n                                          nat;\n                                        }) query;\n  historySize: () -> (nat) query;\n  logo: () -> (text) query;\n  mint: (principal, nat) -> (TxReceipt);\n  name: () -> (text) query;\n  setFee: (nat) -> () oneway;\n  setFeeTo: (principal) -> () oneway;\n  setLogo: (text) -> () oneway;\n  setName: (text) -> () oneway;\n  setOwner: (principal) -> () oneway;\n  symbol: () -> (text) query;\n  totalSupply: () -> (nat) query;\n  transfer: (principal, nat) -> (TxReceipt);\n  transferFrom: (principal, principal, nat) -> (TxReceipt);\n}\n",
+                    "javascript": "export const idlFactory = ({ IDL }) => {\n  const TxReceipt = IDL.Variant({\n    'Ok' : IDL.Nat,\n    'Err' : IDL.Variant({\n      'InsufficientAllowance' : IDL.Null,\n      'InsufficientBalance' : IDL.Null,\n      'ErrorOperationStyle' : IDL.Null,\n      'Unauthorized' : IDL.Null,\n      'LedgerTrap' : IDL.Null,\n      'ErrorTo' : IDL.Null,\n      'Other' : IDL.Text,\n      'BlockUsed' : IDL.Null,\n      'AmountTooSmall' : IDL.Null,\n    }),\n  });\n  const Metadata = IDL.Record({\n    'fee' : IDL.Nat,\n    'decimals' : IDL.Nat8,\n    'owner' : IDL.Principal,\n    'logo' : IDL.Text,\n    'name' : IDL.Text,\n    'totalSupply' : IDL.Nat,\n    'symbol' : IDL.Text,\n  });\n  const Time = IDL.Int;\n  const TokenInfo = IDL.Record({\n    'holderNumber' : IDL.Nat,\n    'deployTime' : Time,\n    'metadata' : Metadata,\n    'historySize' : IDL.Nat,\n    'cycles' : IDL.Nat,\n    'feeTo' : IDL.Principal,\n  });\n  return IDL.Service({\n    'allowance' : IDL.Func(\n        [IDL.Principal, IDL.Principal],\n        [IDL.Nat],\n        ['query'],\n      ),\n    'approve' : IDL.Func([IDL.Principal, IDL.Nat], [TxReceipt], []),\n    'balanceOf' : IDL.Func([IDL.Principal], [IDL.Nat], ['query']),\n    'burn' : IDL.Func([IDL.Nat], [TxReceipt], []),\n    'decimals' : IDL.Func([], [IDL.Nat8], ['query']),\n    'getAllowanceSize' : IDL.Func([], [IDL.Nat], ['query']),\n    'getHolders' : IDL.Func(\n        [IDL.Nat, IDL.Nat],\n        [IDL.Vec(IDL.Tuple(IDL.Principal, IDL.Nat))],\n        ['query'],\n      ),\n    'getMetadata' : IDL.Func([], [Metadata], ['query']),\n    'getTokenFee' : IDL.Func([], [IDL.Nat], ['query']),\n    'getTokenInfo' : IDL.Func([], [TokenInfo], ['query']),\n    'getUserApprovals' : IDL.Func(\n        [IDL.Principal],\n        [IDL.Vec(IDL.Tuple(IDL.Principal, IDL.Nat))],\n        ['query'],\n      ),\n    'historySize' : IDL.Func([], [IDL.Nat], ['query']),\n    'logo' : IDL.Func([], [IDL.Text], ['query']),\n    'mint' : IDL.Func([IDL.Principal, IDL.Nat], [TxReceipt], []),\n    'name' : IDL.Func([], [IDL.Text], ['query']),\n    'setFee' : IDL.Func([IDL.Nat], [], ['oneway']),\n    'setFeeTo' : IDL.Func([IDL.Principal], [], ['oneway']),\n    'setLogo' : IDL.Func([IDL.Text], [], ['oneway']),\n    'setName' : IDL.Func([IDL.Text], [], ['oneway']),\n    'setOwner' : IDL.Func([IDL.Principal], [], ['oneway']),\n    'symbol' : IDL.Func([], [IDL.Text], ['query']),\n    'totalSupply' : IDL.Func([], [IDL.Nat], ['query']),\n    'transfer' : IDL.Func([IDL.Principal, IDL.Nat], [TxReceipt], []),\n    'transferFrom' : IDL.Func(\n        [IDL.Principal, IDL.Principal, IDL.Nat],\n        [TxReceipt],\n        [],\n      ),\n  });\n};\nexport const init = ({ IDL }) => { return []; };"
+                },
+                "method": {
+                    "name": "balanceOf",
+                    "arg": {
+                        "type": "tuple",
+                        "subitems": [{ "key": "_0_", "type": { "type": "principal" } }]
+                    },
+                    "result": {
+                        "type": "tuple",
+                        "subitems": [{ "key": "_0_", "type": { "type": "nat" } }]
+                    }
+                },
+                "arg": {
+                    "type": {
+                        "type": "tuple",
+                        "subitems": [{ "key": "_0_", "type": { "type": "principal" } }]
+                    },
+                    "constraint": {
+                        "type": "tuple",
+                        "subitems": [
+                            {
+                                "type": { "type": "principal" },
+                                "constraint": {
+                                    "type": "force",
+                                    "source": {
+                                        "source": "inner",
+                                        "inner": {
+                                            "name": "20fb2df2-5fd9-4f77-8a13-80e38321746b",
+                                            "result": { "type": "principal" },
+                                            "extra": { "constant": false }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                "identity": { "from": "anonymous" }
+            },
+            "exported": { "target": "inner", "name": "3c41098e-11bc-4dfc-bf9b-9f5c27713201" }
+        },
+        {
+            "source": "inner",
+            "inner": {
+                "name": "3c41098e-11bc-4dfc-bf9b-9f5c27713201",
+                "result": {
+                    "type": "tuple",
+                    "subitems": [{ "key": "_0_", "type": { "type": "nat" } }]
+                },
+                "extra": { "constant": false }
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [{ "key": "_0_", "type": { "type": "nat" } }]
+                },
+                "transform": { "type": "function", "code": "data = data[0];\nresult = data;" },
+                "to": { "type": "nat" }
+            },
+            "exported": { "target": "inner", "name": "806e237d-ccdf-4d37-ae50-60bae3ac45f4" }
+        }
+    ],
+    "transmits": [
+        {
+            "transmit": "show",
+            "from": {
+                "type": "tuple",
+                "subitems": [
+                    { "key": "_0_", "type": { "type": "principal" } },
+                    {
+                        "key": "_1_",
+                        "type": {
+                            "type": "tuple",
+                            "subitems": [{ "key": "_0_", "type": { "type": "nat" } }]
+                        }
+                    },
+                    { "key": "_2_", "type": { "type": "nat" } }
+                ]
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        { "key": "_0_", "type": { "type": "principal" } },
+                        {
+                            "key": "_1_",
+                            "type": {
+                                "type": "tuple",
+                                "subitems": [{ "key": "_0_", "type": { "type": "nat" } }]
+                            }
+                        },
+                        { "key": "_2_", "type": { "type": "nat" } }
+                    ]
+                },
+                "transform": { "type": "function", "code": "result = data[2];" },
+                "to": { "type": "nat" }
+            },
+            "view": {
+                "from": { "type": "nat" },
+                "constraint": { "name": "TextView", "ui": { "customLabel": "TEXT" } }
+            }
+        }
+    ],
+    "trigger": { "type": "button", "text": "Run", "loading": false }
+}

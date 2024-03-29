@@ -1,0 +1,315 @@
+{
+    "version": "0.0.1",
+    "data": [
+        {
+            "source": "constant",
+            "constant": {
+                "result": { "type": "nat" },
+                "value": { "type": "bigint", "value": "1" }
+            },
+            "exported": { "target": "inner", "name": "number1" }
+        },
+        {
+            "source": "constant",
+            "constant": {
+                "result": { "type": "nat8" },
+                "value": 2
+            },
+            "transform": {
+                "from": { "type": "nat8" },
+                "transform": {
+                    "type": "function",
+                    "code": "result = data * data;"
+                },
+                "to": { "type": "nat16" },
+                "nested": {
+                    "from": { "type": "nat16" },
+                    "transform": {
+                        "type": "function",
+                        "code": "result = data * data;"
+                    },
+                    "to": { "type": "nat32" }
+                }
+            },
+            "exported": { "target": "inner", "name": "number2" }
+        },
+        {
+            "source": "inner",
+            "inner": {
+                "result": { "type": "nat" },
+                "name": "number1",
+                "extra": {
+                    "constant": true,
+                    "runtime": { "ok": { "type": "bigint", "value": "1" } }
+                }
+            },
+            "exported": { "target": "inner", "name": "number3" }
+        },
+        {
+            "source": "input",
+            "input": {
+                "result": { "type": "nat" }
+            },
+            "exported": { "target": "inner", "name": "number4" }
+        },
+        {
+            "source": "combined",
+            "combined": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        { "key": "_0_", "type": { "type": "nat" } },
+                        { "key": "_1_", "type": { "type": "nat32" } },
+                        { "key": "_2_", "type": { "type": "nat" } }
+                    ]
+                },
+                "arg": {
+                    "type": {
+                        "type": "tuple",
+                        "subitems": [
+                            { "key": "_0_", "type": { "type": "nat" } },
+                            { "key": "_1_", "type": { "type": "nat32" } },
+                            { "key": "_2_", "type": { "type": "nat" } }
+                        ]
+                    },
+                    "constraint": {
+                        "type": "tuple",
+                        "subitems": [
+                            {
+                                "type": { "type": "nat" },
+                                "constraint": {
+                                    "type": "force",
+                                    "source": {
+                                        "source": "inner",
+                                        "inner": {
+                                            "result": { "type": "nat" },
+                                            "name": "number1",
+                                            "extra": {
+                                                "constant": true,
+                                                "runtime": {
+                                                    "ok": { "type": "bigint", "value": "1" }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "type": { "type": "nat32" },
+                                "constraint": {
+                                    "type": "force",
+                                    "source": {
+                                        "source": "inner",
+                                        "inner": {
+                                            "result": { "type": "nat32" },
+                                            "name": "number2",
+                                            "extra": { "constant": false }
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "type": { "type": "nat" },
+                                "constraint": {
+                                    "type": "force",
+                                    "source": {
+                                        "source": "inner",
+                                        "inner": {
+                                            "result": { "type": "nat" },
+                                            "name": "number4",
+                                            "extra": { "constant": false }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        { "key": "_0_", "type": { "type": "nat" } },
+                        { "key": "_1_", "type": { "type": "nat32" } },
+                        { "key": "_2_", "type": { "type": "nat" } }
+                    ]
+                },
+                "names": ["number1", "number 2", "number4"],
+                "transform": {
+                    "type": "function",
+                    "code": "result = number1 + BigInt(data[1]) + number4"
+                },
+                "to": { "type": "nat" },
+                "nested": {
+                    "from": { "type": "nat" },
+                    "transform": {
+                        "type": "function",
+                        "code": "result = data * BigInt(-1);"
+                    },
+                    "to": { "type": "int" }
+                }
+            },
+            "exported": { "target": "inner", "name": "number5" }
+        }
+    ],
+    "transmits": [
+        {
+            "transmit": "show",
+            "from": {
+                "type": "tuple",
+                "subitems": [
+                    { "key": "_0_", "type": { "type": "nat" } },
+                    { "key": "_1_", "type": { "type": "nat32" } },
+                    { "key": "_2_", "type": { "type": "nat" } },
+                    { "key": "_3_", "type": { "type": "nat" } },
+                    { "key": "_4_", "type": { "type": "int" } }
+                ]
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        { "key": "_0_", "type": { "type": "nat" } },
+                        { "key": "_1_", "type": { "type": "nat32" } },
+                        { "key": "_2_", "type": { "type": "nat" } },
+                        { "key": "_3_", "type": { "type": "nat" } },
+                        { "key": "_4_", "type": { "type": "int" } }
+                    ]
+                },
+                "transform": {
+                    "type": "function",
+                    "code": "result = data[0] + BigInt(data[1]);"
+                },
+                "to": { "type": "nat" }
+            },
+            "view": {
+                "from": { "type": "nat" },
+                "constraint": {
+                    "name": "TextView",
+                    "ui": {
+                        "customLabel": "This is Label 1"
+                    }
+                }
+            }
+        },
+        {
+            "transmit": "show",
+            "from": {
+                "type": "tuple",
+                "subitems": [
+                    { "key": "_0_", "type": { "type": "nat" } },
+                    { "key": "_1_", "type": { "type": "nat32" } },
+                    { "key": "_2_", "type": { "type": "nat" } },
+                    { "key": "_3_", "type": { "type": "nat" } },
+                    { "key": "_4_", "type": { "type": "int" } }
+                ]
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        { "key": "_0_", "type": { "type": "nat" } },
+                        { "key": "_1_", "type": { "type": "nat32" } },
+                        { "key": "_2_", "type": { "type": "nat" } },
+                        { "key": "_3_", "type": { "type": "nat" } },
+                        { "key": "_4_", "type": { "type": "int" } }
+                    ]
+                },
+                "transform": {
+                    "type": "function",
+                    "code": "result = data[0] + data[2];"
+                },
+                "to": { "type": "nat" }
+            },
+            "view": {
+                "from": { "type": "nat" },
+                "constraint": {
+                    "name": "TextView",
+                    "ui": {
+                        "customLabel": "This is Label 2"
+                    }
+                }
+            }
+        },
+        {
+            "transmit": "show",
+            "from": {
+                "type": "tuple",
+                "subitems": [
+                    { "key": "_0_", "type": { "type": "nat" } },
+                    { "key": "_1_", "type": { "type": "nat32" } },
+                    { "key": "_2_", "type": { "type": "nat" } },
+                    { "key": "_3_", "type": { "type": "nat" } },
+                    { "key": "_4_", "type": { "type": "int" } }
+                ]
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        { "key": "_0_", "type": { "type": "nat" } },
+                        { "key": "_1_", "type": { "type": "nat32" } },
+                        { "key": "_2_", "type": { "type": "nat" } },
+                        { "key": "_3_", "type": { "type": "nat" } },
+                        { "key": "_4_", "type": { "type": "int" } }
+                    ]
+                },
+                "transform": {
+                    "type": "function",
+                    "code": "result = data[0] + data[3];"
+                },
+                "to": { "type": "nat" }
+            },
+            "view": {
+                "from": { "type": "nat" },
+                "constraint": {
+                    "name": "TextView",
+                    "ui": {
+                        "customLabel": "This is Label 3"
+                    }
+                }
+            }
+        },
+        {
+            "transmit": "show",
+            "from": {
+                "type": "tuple",
+                "subitems": [
+                    { "key": "_0_", "type": { "type": "nat" } },
+                    { "key": "_1_", "type": { "type": "nat32" } },
+                    { "key": "_2_", "type": { "type": "nat" } },
+                    { "key": "_3_", "type": { "type": "nat" } },
+                    { "key": "_4_", "type": { "type": "int" } }
+                ]
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        { "key": "_0_", "type": { "type": "nat" } },
+                        { "key": "_1_", "type": { "type": "nat32" } },
+                        { "key": "_2_", "type": { "type": "nat" } },
+                        { "key": "_3_", "type": { "type": "nat" } },
+                        { "key": "_4_", "type": { "type": "int" } }
+                    ]
+                },
+                "transform": {
+                    "type": "function",
+                    "code": "result = data[4];"
+                },
+                "to": { "type": "int" }
+            },
+            "view": {
+                "from": { "type": "int" },
+                "constraint": {
+                    "name": "TextView",
+                    "ui": {
+                        "customLabel": "This is Label 4"
+                    }
+                }
+            }
+        }
+    ],
+    "trigger": { "type": "button", "text": "Run", "loading": false }
+}

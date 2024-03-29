@@ -1,0 +1,50 @@
+{
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "npm.packageManager": "pnpm",
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.eol": "\n",
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[vue]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+        },
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "cSpell.words": [
+        "2vxsx-fae",
+        "astrox",
+        "codepaths",
+        "Dstar",
+        "entrypoints",
+        "GM3TGMIKZI",
+        "guanghechen",
+        "iconfont",
+        "iconify",
+        "nprogress",
+        "Parens",
+        "QmfVV8acYbEnhjMN4G8Pru2gzLcsam8Y12zZt2TTNvsy9S",
+        "QmPMgAEogb3oaygekaEVZGvTtRcrag9RUYiizt7sPk4oSW",
+        "soerenmartius",
+        "tsbuildinfo",
+        "unplugin",
+        "VDDKSXIY3FIZMWJ",
+        "AA5O64TBZ2FMJXM",
+        "vueuse",
+        "vuex",
+        "windicss",
+        "zoomout",
+        "μrec"
+    ],
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    }
+}

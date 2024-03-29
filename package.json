@@ -1,0 +1,46 @@
+{
+    "name": "mora-light",
+    "version": "1.0.0",
+    "description": "Mora Light",
+    "main": "index.js",
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "build": "preconstruct build",
+        "dev": "preconstruct watch",
+        "postinstall": "preconstruct dev"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dstarapp/mora-light.git"
+    },
+    "keywords": [
+        "Mora"
+    ],
+    "author": "Anubis",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/dstarapp/mora-light/issues"
+    },
+    "homepage": "https://github.com/dstarapp/mora-light#readme",
+    "devDependencies": {
+        "@babel/core": "^7.21.4",
+        "@babel/preset-env": "^7.21.4",
+        "@babel/preset-typescript": "^7.21.4",
+        "@preconstruct/cli": "^2.5.0",
+        "element-plus": "^2.3.0",
+        "prettier": "^2.8.7",
+        "typescript": "^5.0.4"
+    },
+    "engines": {
+        "npm": ">=7.0.0",
+        "node": ">=14.0.0"
+    },
+    "packageManager": "npm@8.1.0",
+    "preconstruct": {
+        "packages": [
+            "packages/core"
+        ]
+    }
+}

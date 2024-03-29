@@ -1,0 +1,291 @@
+{
+    "version": "0.0.1",
+    "data": [
+        {
+            "source": "combined",
+            "combined": {
+                "from": { "type": "tuple", "subitems": [] },
+                "arg": {
+                    "type": { "type": "tuple", "subitems": [] },
+                    "constraint": { "type": "tuple", "subitems": [] }
+                }
+            },
+            "transform": {
+                "from": { "type": "tuple", "subitems": [] },
+                "transform": {
+                    "type": "function",
+                    "code": "result = {\n  header: [\"header1\", \"header2\", \"header3\", \"header4\"],\n  rows: [\n      [\"tjyus-zqaaa-aaaai-qnn3a-cai\",\"tjyus-zqaaa-aaaai-qnn3a-cai\",\"tjyus-zqaaa-aaaai-qnn3a-cai\",\"tjyus-zqaaa-aaaai-qnn3a-cai\"],[\"row21\",\"row22\",\"row23\",\"row24\"],[\"row31\",\"row32\",\"row33\",\"row34\"]\n  ]\n};\nresult = [result];"
+                },
+                "to": {
+                    "type": "tuple",
+                    "subitems": [
+                        {
+                            "key": "_0_",
+                            "type": {
+                                "type": "record",
+                                "subitems": [
+                                    {
+                                        "key": "header",
+                                        "type": { "type": "vec", "subtype": { "type": "text" } }
+                                    },
+                                    {
+                                        "key": "rows",
+                                        "type": {
+                                            "type": "vec",
+                                            "subtype": {
+                                                "type": "vec",
+                                                "subtype": { "type": "text" }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            "exported": { "target": "inner", "name": "44e12565-e0e6-4dcb-95a4-9ca7b2ec0107" }
+        },
+        {
+            "source": "inner",
+            "inner": {
+                "name": "44e12565-e0e6-4dcb-95a4-9ca7b2ec0107",
+                "result": {
+                    "type": "tuple",
+                    "subitems": [
+                        {
+                            "key": "_0_",
+                            "type": {
+                                "type": "record",
+                                "subitems": [
+                                    {
+                                        "key": "header",
+                                        "type": { "type": "vec", "subtype": { "type": "text" } }
+                                    },
+                                    {
+                                        "key": "rows",
+                                        "type": {
+                                            "type": "vec",
+                                            "subtype": {
+                                                "type": "vec",
+                                                "subtype": { "type": "text" }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "extra": { "constant": false }
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        {
+                            "key": "_0_",
+                            "type": {
+                                "type": "record",
+                                "subitems": [
+                                    {
+                                        "key": "header",
+                                        "type": { "type": "vec", "subtype": { "type": "text" } }
+                                    },
+                                    {
+                                        "key": "rows",
+                                        "type": {
+                                            "type": "vec",
+                                            "subtype": {
+                                                "type": "vec",
+                                                "subtype": { "type": "text" }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "transform": { "type": "function", "code": "data = data[0];\nresult = data;" },
+                "to": {
+                    "type": "record",
+                    "subitems": [
+                        {
+                            "key": "header",
+                            "type": { "type": "vec", "subtype": { "type": "text" } }
+                        },
+                        {
+                            "key": "rows",
+                            "type": {
+                                "type": "vec",
+                                "subtype": { "type": "vec", "subtype": { "type": "text" } }
+                            }
+                        }
+                    ]
+                }
+            },
+            "exported": { "target": "inner", "name": "f5744ab3-a213-414a-baeb-ae904a9e521a" }
+        }
+    ],
+    "transmits": [
+        {
+            "transmit": "show",
+            "from": {
+                "type": "tuple",
+                "subitems": [
+                    {
+                        "key": "_0_",
+                        "type": {
+                            "type": "tuple",
+                            "subitems": [
+                                {
+                                    "key": "_0_",
+                                    "type": {
+                                        "type": "record",
+                                        "subitems": [
+                                            {
+                                                "key": "header",
+                                                "type": {
+                                                    "type": "vec",
+                                                    "subtype": { "type": "text" }
+                                                }
+                                            },
+                                            {
+                                                "key": "rows",
+                                                "type": {
+                                                    "type": "vec",
+                                                    "subtype": {
+                                                        "type": "vec",
+                                                        "subtype": { "type": "text" }
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "key": "_1_",
+                        "type": {
+                            "type": "record",
+                            "subitems": [
+                                {
+                                    "key": "header",
+                                    "type": { "type": "vec", "subtype": { "type": "text" } }
+                                },
+                                {
+                                    "key": "rows",
+                                    "type": {
+                                        "type": "vec",
+                                        "subtype": { "type": "vec", "subtype": { "type": "text" } }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "transform": {
+                "from": {
+                    "type": "tuple",
+                    "subitems": [
+                        {
+                            "key": "_0_",
+                            "type": {
+                                "type": "tuple",
+                                "subitems": [
+                                    {
+                                        "key": "_0_",
+                                        "type": {
+                                            "type": "record",
+                                            "subitems": [
+                                                {
+                                                    "key": "header",
+                                                    "type": {
+                                                        "type": "vec",
+                                                        "subtype": { "type": "text" }
+                                                    }
+                                                },
+                                                {
+                                                    "key": "rows",
+                                                    "type": {
+                                                        "type": "vec",
+                                                        "subtype": {
+                                                            "type": "vec",
+                                                            "subtype": { "type": "text" }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "key": "_1_",
+                            "type": {
+                                "type": "record",
+                                "subitems": [
+                                    {
+                                        "key": "header",
+                                        "type": { "type": "vec", "subtype": { "type": "text" } }
+                                    },
+                                    {
+                                        "key": "rows",
+                                        "type": {
+                                            "type": "vec",
+                                            "subtype": {
+                                                "type": "vec",
+                                                "subtype": { "type": "text" }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "transform": { "type": "function", "code": "result = data[1];" },
+                "to": {
+                    "type": "record",
+                    "subitems": [
+                        {
+                            "key": "header",
+                            "type": { "type": "vec", "subtype": { "type": "text" } }
+                        },
+                        {
+                            "key": "rows",
+                            "type": {
+                                "type": "vec",
+                                "subtype": { "type": "vec", "subtype": { "type": "text" } }
+                            }
+                        }
+                    ]
+                }
+            },
+            "view": {
+                "from": {
+                    "type": "record",
+                    "subitems": [
+                        {
+                            "key": "header",
+                            "type": { "type": "vec", "subtype": { "type": "text" } }
+                        },
+                        {
+                            "key": "rows",
+                            "type": {
+                                "type": "vec",
+                                "subtype": { "type": "vec", "subtype": { "type": "text" } }
+                            }
+                        }
+                    ]
+                },
+                "constraint": { "name": "TableView", "ui": { "customLabel": "Result" } }
+            }
+        }
+    ]
+}

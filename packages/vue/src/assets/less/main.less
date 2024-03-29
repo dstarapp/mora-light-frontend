@@ -1,0 +1,53 @@
+.loading-animation {
+    width: 52px;
+    height: 52px;
+    border: 6px solid rgba(53, 212, 154, 0.3);
+    border-bottom: #35d49a 6px solid;
+    border-radius: 50%;
+    animation: load 1.1s infinite linear;
+    -webkit-animation: load 1.1s infinite linear;
+    -moz-animation: load 1.1s infinite linear;
+    -o-animation: load 1.1s infinite linear;
+}
+
+@keyframes load {
+    from {
+        transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes load {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes load {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes load {
+    from {
+        -o-transform: rotate(0deg);
+    }
+
+    to {
+        -o-transform: rotate(360deg);
+    }
+}

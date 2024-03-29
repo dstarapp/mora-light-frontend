@@ -1,0 +1,4 @@
+{
+    "main": "dist/mora-light-core-types-common.cjs.js",
+    "module": "dist/mora-light-core-types-common.esm.js"
+}
